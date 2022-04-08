@@ -4,13 +4,13 @@
 	<meta charset="utf-8" />
 	<style>
 		body {
-			background: #eee;
+			background: #444;
 			margin: 0;
 			padding: 0;
 		}
 
 		canvas {
-			border: 2px solid black;
+			border: 2px solid white;
 			margin: 0 auto;
 			display: block;
 		}
@@ -19,8 +19,8 @@
 			border-radius: 5px;
 			font-size: 1.5em;
 			background-color: transparent;
-			color: black;
-			border: 3px solid black;
+			color: white;
+			border: 3px solid white;
 		}
 
 		.button-section {
@@ -31,7 +31,7 @@
 </head>
 
 <body>
-	<canvas id="canvas" width="720" height="800"></canvas>
+	<canvas id="canvas" width="720" height="600"></canvas>
 	<div class="button-section">
 		<button onclick="gameManager.downBalls()">End round</button>
 		<button onclick="location.reload()">New game</button>
@@ -154,14 +154,14 @@
 		const canvas = document.getElementById("canvas");
 		const ctx = canvas.getContext("2d");
 
-		const width = 710;
-		const height = 880;
+		const width = 700;
+		const height = 700;
 		const uiOffsetY = 80;
 
 		canvas.width = width;
 		canvas.height = height;
 
-		function line(x1, y1, x2, y2, color = "#000") {
+		function line(x1, y1, x2, y2, color = "#fff") {
 			ctx.beginPath();
 			ctx.strokeStyle = color;
 			ctx.lineWidth = 2;
@@ -182,7 +182,7 @@
 		function rect(x, y, w, h) {
 			ctx.beginPath();
 			ctx.rect(x, y, w, h);
-			ctx.strokeStyle = "#000";
+			ctx.strokeStyle = "#fff";
 			ctx.stroke();
 			ctx.closePath();
 		}
@@ -418,7 +418,7 @@
 
 			display(state) {
 				fillRect(this.x, this.y, this.w, this.h, this.color(state.level));
-				ctx.fillStyle = "black";
+				ctx.fillStyle = "white";
 				ctx.font = "20px Arial";
 				ctx.fillText(
 					this.n,
@@ -593,26 +593,30 @@
 			}
 
 			showScore(state) {
+				ctx.fillStyle = "white";
 				ctx.fillText(`Current score: ${state.level}`, 30, uiOffsetY / 2 + 7);
 				ctx.fillText(
 					`Highest score: ${state.bestLevel}`,
-					width - 150,
+					width - 190,
 					uiOffsetY / 2 + 7
 				);
 			}
 
 			showBallCount(state) {
-				if (!state.ballMoving)
+				if (!state.ballMoving) {
+					ctx.fillStyle = "white";
 					ctx.fillText(
 						`x${state.ballCount}`,
 						state.ballPos.x - 10,
 						height - 55
 					);
+				}
 			}
 
 			gameOver() {
 				fillRect(0, height / 2 - 100, width, 200, "rgba(0, 0, 0, 0.3)");
 				ctx.font = "40px Arial";
+				ctx.fillStyle = "white";
 				ctx.fillText("Defeat!", width / 2 - 40, height / 2 + 12);
 				ctx.font = "20px Arial";
 			}
