@@ -1,7 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Brick Bouncer</title>
 	<style>
 		body {
 			background: #444;
@@ -13,6 +16,10 @@
 			border: 2px solid white;
 			margin: 0 auto;
 			display: block;
+			margin-top: 20px;
+			margin-bottom: 20px;
+			max-width: 90%;
+			max-height: 80vh;
 		}
 
 		button {
@@ -155,7 +162,7 @@
 		const ctx = canvas.getContext("2d");
 
 		const width = 700;
-		const height = 700;
+		const height = 800;
 		const uiOffsetY = 80;
 
 		canvas.width = width;
@@ -851,6 +858,7 @@
 
 			draw() {
 				clear();
+				// Aim line
 				// this.ballLine.display(this.state);
 				this.balls.display();
 				this.bricks.display(this.state);
@@ -897,8 +905,8 @@
 		canvas.addEventListener("mousemove", (e) => {
 			const scale = ctx.scale;
 			const offset = ctx.offset;
-			const mx = e.pageX - canvas.offsetLeft;
-			const my = e.pageY;
+			const mx = e.offsetX * canvas.width / canvas.clientWidth | 0;
+			const my = e.offsetY * canvas.height / canvas.clientHeight | 0;
 
 			Mouse.position = new Vector(mx, my);
 		});
